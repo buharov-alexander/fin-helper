@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import AccountsTable from 'components/accounts/AccountsTable';
+import AccountsTable from 'accounts/AccountsTable';
 
 function App() {
   return (
