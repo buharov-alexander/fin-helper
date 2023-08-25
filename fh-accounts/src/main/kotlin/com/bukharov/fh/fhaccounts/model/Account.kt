@@ -8,5 +8,5 @@ class Account(
 	val name: String,
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	val id: Int? = null,
+	val id: Long? = null,
 )
