@@ -25,6 +25,8 @@ export default function BasicTable() {
           <TableRow>
             <TableCell>ID</TableCell>
             <TableCell align="right">Name</TableCell>
+            <TableCell align="right">Balance</TableCell>
+            <TableCell align="right">Currency</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -36,6 +38,8 @@ export default function BasicTable() {
                 {account.id}
               </TableCell>
               <TableCell align="right">{account.name}</TableCell>
+              <TableCell align="right">{account.balance.amount}</TableCell>
+              <TableCell align="right">{account.balance.currency}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -1,9 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
 
+
+interface Money {
+    amount: number,
+    currency: String
+}
 interface Account {
     id: number,
     name: string,
+    balance: Money
 }
 
 
