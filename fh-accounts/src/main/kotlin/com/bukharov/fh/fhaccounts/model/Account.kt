@@ -9,14 +9,20 @@ import java.math.BigDecimal
 class Account(
 	@Column(nullable = false)
 	val name: String,
-	@Column(length = 3, nullable = false)
-	var currency: String,
-	@Column(columnDefinition = "Decimal(19,3) default '0.00'", nullable = false)
-	var balance: BigDecimal,
+	balance: Money,
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	val id: Long? = null,
 ) {
+	@Column(length = 3, nullable = false)
+	private var currency: String = "RUB"
+	@Column(columnDefinition = "Decimal(19,2) default '0.00'", nullable = false)
+	private var balance: BigDecimal = BigDecimal(0)
+
+	init {
+		setBalance(balance)
+	}
+
 	fun getBalance(): Money {
 		return Money.of(CurrencyUnit.of(currency), balance)
 	}
