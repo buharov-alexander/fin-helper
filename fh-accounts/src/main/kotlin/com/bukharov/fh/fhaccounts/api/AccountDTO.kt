@@ -9,7 +9,7 @@ data class AccountDTO(
 	val balance: Money
 ) {
 	fun toModel(): Account {
-		return Account(name, balance)
+		return Account(name, balance, id)
 	}
 
 	constructor(account: Account) : this(account.id, account.name, account.getBalance())
