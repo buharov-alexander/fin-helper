@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/accounts")
-class AccountsController(private val accountService: AccountService) {
+internal class AccountsController(private val accountService: AccountService) {
 
 	@GetMapping("/list")
 	fun getAccounts(): List<AccountDTO> {

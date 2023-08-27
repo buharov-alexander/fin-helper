@@ -5,7 +5,7 @@ import com.bukharov.fh.fhaccounts.service.AccountService
 import org.springframework.stereotype.Service
 
 @Service
-class AccountServiceImpl(val accountRepository: AccountRepository) : AccountService {
+internal class AccountServiceImpl(val accountRepository: AccountRepository) : AccountService {
 	override fun getAccounts(): List<Account> {
 		return accountRepository.findAll().toList()
 	}

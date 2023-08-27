@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Primary
 
 
 @Configuration
-class JacksonConfig {
+internal class JacksonConfig {
 
 	@Bean
 	@Primary
