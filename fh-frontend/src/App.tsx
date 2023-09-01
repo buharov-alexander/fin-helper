@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import AccountsTable from 'accounts/AccountsTable';
+import SummaryPage from 'pages/Summary';
 
 function App() {
   return (
     <div className="App">
-      <AccountsTable />
+      <SummaryPage />
     </div>
   );
 }
