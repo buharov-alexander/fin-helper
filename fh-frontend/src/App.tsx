@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import SummaryPage from 'pages/Summary';
+import SummaryPage from 'pages/SummaryPage';
 
 function App() {
   return (

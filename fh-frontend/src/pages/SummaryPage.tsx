@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
 import AccountsTable from 'accounts/AccountsTable';
+import FinalAmount from 'accounts/FinalAmount';
 
 export default function SummaryPage() {
     return (
@@ -10,6 +11,9 @@ export default function SummaryPage() {
             <Grid container spacing={2}>
                 <Grid item xs={8}>
                     <AccountsTable />
+                </Grid>
+                <Grid item xs={4}>
+                    <FinalAmount />
                 </Grid>
             </Grid>
         </Box>
