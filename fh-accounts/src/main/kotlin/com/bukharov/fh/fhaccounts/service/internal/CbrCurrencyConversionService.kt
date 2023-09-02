@@ -11,8 +11,13 @@ import org.springframework.web.client.getForObject
 internal class CbrCurrencyConversionService: CurrencyConversionService {
 
 	private val restTemplate = RestTemplate()
+	internal val SUPPORTED_CURRENCY = listOf("USD", "EUR")
 
 	override fun getDailyRates(): CurrencyRatesDTO {
-		return restTemplate.getForObject("http://www.cbr.ru/scripts/XML_daily_eng.asp", CurrencyRatesDTO::class)
+		val ratesDTO = restTemplate
+				.getForObject<CurrencyRatesDTO>("http://www.cbr.ru/scripts/XML_daily_eng.asp", CurrencyRatesDTO::class)
+				.currencyRate
+				.filter { rateDTO -> SUPPORTED_CURRENCY.contains(rateDTO.code) }
+		return CurrencyRatesDTO(ratesDTO)
 	}
 }
