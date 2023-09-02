@@ -10,40 +10,36 @@ import Paper from '@mui/material/Paper';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { loadAccounts, selectAccounts } from 'accounts/accountsSlice'
 
-export default function BasicTable() {
-  const dispatch = useAppDispatch();
-  const accounts = useAppSelector(selectAccounts);
+export default function AccountsTable() {
+    const dispatch = useAppDispatch();
+    const accounts = useAppSelector(selectAccounts);
 
-  useEffect(() => {
-    dispatch(loadAccounts());
-  }, [dispatch]);
+    useEffect(() => {
+        dispatch(loadAccounts());
+    }, [dispatch]);
 
-  return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} size="small"  aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Balance</TableCell>
-            <TableCell align="right">Currency</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {accounts.map((account) => (
-            <TableRow
-              key={account.id}
-            >
-              <TableCell component="th" scope="row">
-                {account.id}
-              </TableCell>
-              <TableCell align="right">{account.name}</TableCell>
-              <TableCell align="right">{account.balance.amount}</TableCell>
-              <TableCell align="right">{account.balance.currency}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+    return (
+        <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} size="small" aria-label="simple table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell>ID</TableCell>
+                        <TableCell align="right">Name</TableCell>
+                        <TableCell align="right">Balance</TableCell>
+                        <TableCell align="right">Currency</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {accounts.map((account) => (
+                        <TableRow key={account.id}>
+                            <TableCell component="th" scope="row">{account.id}</TableCell>
+                            <TableCell align="right">{account.name}</TableCell>
+                            <TableCell align="right">{account.balance.amount}</TableCell>
+                            <TableCell align="right">{account.balance.currency}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+    );
 }
