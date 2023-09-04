@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 
 import { Account } from 'accounts/accountsSlice'
 
-type AccountsTableProps = {
+interface AccountsTableProps {
     accounts: Account[],
 }
 

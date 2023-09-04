@@ -5,7 +5,8 @@ import Grid from '@mui/material/Grid';
 import AccountsTable from 'accounts/AccountsTable';
 import FinalAmount from 'accounts/FinalAmount';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { loadAccounts, selectAccounts } from 'accounts/accountsSlice'
+import { loadAccounts, selectAccounts } from 'accounts/accountsSlice';
+import { loadCurrency } from 'currency/currencySlice';
 
 export default function SummaryPage() {
     const dispatch = useAppDispatch();
@@ -13,6 +14,7 @@ export default function SummaryPage() {
 
     useEffect(() => {
         dispatch(loadAccounts());
+        dispatch(loadCurrency());
     }, [dispatch]);
 
 

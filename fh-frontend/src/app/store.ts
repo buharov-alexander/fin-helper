@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import accountsReducer from 'accounts/accountsSlice';
+import currencyReducer from 'currency/currencySlice';
 
 const store = configureStore({
     reducer: {
-        accounts: accountsReducer
+        accounts: accountsReducer,
+        currency: currencyReducer
     },
 })
 

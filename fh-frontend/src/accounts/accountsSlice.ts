@@ -13,7 +13,7 @@ export interface Account {
 }
 
 
-export interface AccountsState {
+interface AccountsState {
     accounts: Account[];
     status: 'idle' | 'loading' | 'failed';
 }
