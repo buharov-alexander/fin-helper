@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {FC, ReactElement} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,17 +7,13 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { loadAccounts, selectAccounts } from 'accounts/accountsSlice'
+import { Account } from 'accounts/accountsSlice'
 
-export default function AccountsTable() {
-    const dispatch = useAppDispatch();
-    const accounts = useAppSelector(selectAccounts);
+type AccountsTableProps = {
+    accounts: Account[],
+}
 
-    useEffect(() => {
-        dispatch(loadAccounts());
-    }, [dispatch]);
-
+const AccountsTable: FC<AccountsTableProps> = ({accounts}) : ReactElement => {
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} size="small" aria-label="simple table">
@@ -43,3 +39,5 @@ export default function AccountsTable() {
         </TableContainer>
     );
 }
+
+export default AccountsTable;

@@ -6,7 +6,7 @@ interface Money {
     amount: number,
     currency: String
 }
-interface Account {
+export interface Account {
     id: number,
     name: string,
     balance: Money
