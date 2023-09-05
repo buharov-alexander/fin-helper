@@ -4,7 +4,7 @@ import { RootState } from 'app/store';
 
 interface Money {
     amount: number,
-    currency: String
+    currency: string
 }
 export interface Account {
     id: number,

@@ -6,11 +6,12 @@ import AccountsTable from 'accounts/AccountsTable';
 import FinalAmount from 'accounts/FinalAmount';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { loadAccounts, selectAccounts } from 'accounts/accountsSlice';
-import { loadCurrency } from 'currency/currencySlice';
+import { loadCurrency, selectCurrencyRates } from 'currency/currencySlice';
 
 export default function SummaryPage() {
     const dispatch = useAppDispatch();
     const accounts = useAppSelector(selectAccounts);
+    const currencyRates = useAppSelector(selectCurrencyRates);
 
     useEffect(() => {
         dispatch(loadAccounts());
@@ -25,7 +26,7 @@ export default function SummaryPage() {
                     <AccountsTable accounts={accounts}/>
                 </Grid>
                 <Grid item xs={4}>
-                    <FinalAmount />
+                    <FinalAmount accounts={accounts} currencyRates={currencyRates}/>
                 </Grid>
             </Grid>
         </Box>
