@@ -1,0 +1,15 @@
+.b-final-amount {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .b-final-amount__value {
+        font-size: 28px;
+
+        &.b-final-amount__value_secondary {
+            font-size: 12px;
+        }
+    }
+}
