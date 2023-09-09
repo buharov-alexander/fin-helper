@@ -1,12 +1,12 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, createSelector } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
 
 interface CurrencyState {
-    rates: Map<string, number>
+    rates: {[currencyCode: string]: number}
 }
 
 const initialState: CurrencyState = {
-    rates: new Map()
+    rates: {}
 };
 
 export const loadCurrency = createAsyncThunk(
@@ -25,11 +25,15 @@ export const currencySlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(loadCurrency.fulfilled, (state, action) => {
-                state.rates = new Map(Object.entries(action.payload));
+                state.rates = {...state.rates, ...action.payload};
             });
     },
 });
 
 export const selectCurrencyRates = (state: RootState) => state.currency.rates;
+export const selectCurrencyRateMap = createSelector(
+    [selectCurrencyRates],
+    rates => new Map(Object.entries(rates))
+);
 
 export default currencySlice.reducer;
