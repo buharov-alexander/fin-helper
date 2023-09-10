@@ -33,7 +33,7 @@ export const loadAccounts = createAsyncThunk(
 export const deleteAccount = createAsyncThunk(
     'accounts/deleteAccount',
     async (id: number, thunkAPI) => {
-        await fetch(`/accounts/delete/${id}`);
+        await fetch(`/accounts/account/${id}`, { method: 'DELETE' });
         thunkAPI.dispatch(loadAccounts())
     }
 );

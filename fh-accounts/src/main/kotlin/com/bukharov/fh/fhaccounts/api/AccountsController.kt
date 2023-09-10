@@ -2,7 +2,9 @@ package com.bukharov.fh.fhaccounts.api
 
 import com.bukharov.fh.fhaccounts.model.Account
 import com.bukharov.fh.fhaccounts.service.AccountService
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -22,4 +24,8 @@ internal class AccountsController(private val accountService: AccountService) {
 		return AccountDTO(accountService.create(accountDTO.toModel()))
 	}
 
+	@DeleteMapping("/account/{id}")
+	fun deleteAccount(@PathVariable id: Long) {
+		accountService.delete(id)
+	}
 }

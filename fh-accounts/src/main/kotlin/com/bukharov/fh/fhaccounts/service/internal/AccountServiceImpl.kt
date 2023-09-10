@@ -13,4 +13,8 @@ internal class AccountServiceImpl(val accountRepository: AccountRepository) : Ac
 	override fun create(account: Account): Account {
 		return accountRepository.save(account)
 	}
+
+	override fun delete(accountId: Long) {
+		return accountRepository.deleteById(accountId)
+	}
 }
