@@ -43,8 +43,8 @@ const AccountsTable: FC<AccountsTableProps> = ({ accounts }): ReactElement => {
                                 <IconButton aria-label="edit">
                                     <EditIcon fontSize='small' />
                                 </IconButton>
-                                <IconButton aria-label="delete">
-                                    <DeleteIcon fontSize='small' onClick={() => dispatch(deleteAccount(account.id))} />
+                                <IconButton aria-label="delete" onClick={() => dispatch(deleteAccount(account.id))}>
+                                    <DeleteIcon fontSize='small' />
                                 </IconButton>
                             </TableCell>
                         </TableRow>
