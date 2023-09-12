@@ -4,12 +4,14 @@ import com.bukharov.fh.fhaccounts.model.Account
 import com.bukharov.fh.fhaccounts.service.AccountService
 import org.joda.money.Money
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.lang.IllegalArgumentException
 
 @Service
+@Transactional
 internal class AccountServiceImpl(val accountRepository: AccountRepository) : AccountService {
 	override fun getAccounts(): List<Account> {
-		return accountRepository.findAll().toList()
+		return accountRepository.findByIsDisabledFalse()
 	}
 
 	override fun create(account: Account): Account {
@@ -26,7 +28,13 @@ internal class AccountServiceImpl(val accountRepository: AccountRepository) : Ac
 		throw IllegalArgumentException("Account is not found")
 	}
 
-	override fun delete(accountId: Long) {
-		return accountRepository.deleteById(accountId)
+	override fun delete(accountId: Long): Account {
+		val optional = accountRepository.findById(accountId)
+		if (optional.isPresent) {
+			val existingAccount = optional.get()
+			existingAccount.isDisabled = true
+			return existingAccount
+		}
+		throw IllegalArgumentException("Account is not found")
 	}
 }

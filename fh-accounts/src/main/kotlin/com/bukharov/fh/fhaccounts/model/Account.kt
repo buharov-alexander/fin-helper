@@ -18,6 +18,8 @@ class Account(
 	private var currency: String = "RUB"
 	@Column(columnDefinition = "Decimal(19,2) default '0.00'", nullable = false)
 	private var balance: BigDecimal = BigDecimal(0)
+	@Column(nullable = false)
+	var isDisabled: Boolean = false
 
 	init {
 		setBalance(balance)
