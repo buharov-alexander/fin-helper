@@ -30,6 +30,20 @@ export const loadAccounts = createAsyncThunk(
     }
 );
 
+export const updateAccount = createAsyncThunk(
+    'accounts/updateAccount',
+    async ({ id, balance }: { id: number, balance: Money }, thunkAPI) => {
+        await fetch(`/accounts/account/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(balance),
+            headers: {
+                "Content-Type": "application/json",
+              },
+        });
+        thunkAPI.dispatch(loadAccounts())
+    }
+);
+
 export const deleteAccount = createAsyncThunk(
     'accounts/deleteAccount',
     async (id: number, thunkAPI) => {

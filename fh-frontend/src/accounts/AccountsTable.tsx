@@ -21,9 +21,9 @@ const AccountsTable: FC<AccountsTableProps> = ({ accounts }): ReactElement => {
                 <TableHead>
                     <TableRow>
                         <TableCell>ID</TableCell>
-                        <TableCell align="right">Name</TableCell>
-                        <TableCell align="right">Balance</TableCell>
-                        <TableCell align="right">Currency</TableCell>
+                        <TableCell align="left">Name</TableCell>
+                        <TableCell align="left">Balance</TableCell>
+                        <TableCell align="left">Currency</TableCell>
                         <TableCell align="right">Actions</TableCell>
                     </TableRow>
                 </TableHead>
