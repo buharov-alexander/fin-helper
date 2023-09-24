@@ -9,7 +9,7 @@ import java.lang.IllegalArgumentException
 
 @Service
 @Transactional
-internal class AccountServiceImpl(val accountRepository: AccountRepository) : AccountService {
+internal class AccountServiceImpl(private val accountRepository: AccountRepository) : AccountService {
 	override fun getAccounts(): List<Account> {
 		return accountRepository.findByIsDisabledFalse()
 	}

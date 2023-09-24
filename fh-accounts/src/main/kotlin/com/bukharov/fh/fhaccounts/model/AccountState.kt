@@ -7,20 +7,15 @@ import java.math.BigDecimal
 import java.util.Date
 
 @Entity
-class Account(
-	@Column(nullable = false)
-	val name: String,
-	balance: Money,
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+class AccountState(
 	val id: Long? = null,
+	val date: Date,
+	balance: Money,
 ) {
 	@Column(length = 3, nullable = false)
 	private var currency: String = "RUB"
 	@Column(columnDefinition = "Decimal(19,2) default '0.00'", nullable = false)
 	private var balance: BigDecimal = BigDecimal(0)
-	@Column(nullable = false)
-	var isDisabled: Boolean = false
 
 	init {
 		setBalance(balance)
@@ -33,9 +28,5 @@ class Account(
 	fun setBalance(money: Money) {
 		currency = money.currencyUnit.code
 		balance = money.amount
-	}
-
-	fun getState(): AccountState {
-		return AccountState(id, Date(), getBalance())
 	}
 }
