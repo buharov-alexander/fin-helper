@@ -8,9 +8,12 @@ import java.util.Date
 
 @Entity
 class AccountState(
-	val id: Long? = null,
+	val accountId: Long?,
 	val date: Date,
 	balance: Money,
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	val id: Long? = null,
 ) {
 	@Column(length = 3, nullable = false)
 	private var currency: String = "RUB"
