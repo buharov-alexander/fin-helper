@@ -2,6 +2,7 @@ package com.bukharov.fh.fhaccounts.api
 
 import com.bukharov.fh.fhaccounts.model.Account
 import com.bukharov.fh.fhaccounts.service.AccountService
+import com.bukharov.fh.fhaccounts.service.AccountStateService
 import org.joda.money.Money
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/accounts")
-internal class AccountsController(private val accountService: AccountService) {
+internal class AccountsController(
+	private val accountService: AccountService, private val accountStateService: AccountStateService) {
 
 	@GetMapping("/list")
 	fun getAccounts(): List<AccountDTO> {
@@ -34,5 +36,10 @@ internal class AccountsController(private val accountService: AccountService) {
 	@DeleteMapping("/account/{id}")
 	fun deleteAccount(@PathVariable id: Long) {
 		accountService.delete(id)
+	}
+
+	@GetMapping("/account/{id}/states")
+	fun getAccountStates(@PathVariable id: Long): List<AccountStateDTO> {
+		return accountStateService.getStates(id).map { accountState -> AccountStateDTO(accountState) }
 	}
 }

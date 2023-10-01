@@ -20,7 +20,7 @@ internal class AccountServiceImpl(
 
 	override fun create(account: Account): Account {
 		val savedAccount = accountRepository.save(account)
-		publisher.publishEvent(savedAccount)
+		publisher.publishEvent(AccountStateChangedEvent(this, savedAccount))
 		return savedAccount
 	}
 
@@ -29,7 +29,7 @@ internal class AccountServiceImpl(
 		if (optional.isPresent) {
 			val existingAccount = optional.get()
 			existingAccount.setBalance(balance)
-			publisher.publishEvent(existingAccount)
+			publisher.publishEvent(AccountStateChangedEvent(this, existingAccount))
 			return existingAccount
 		}
 		throw IllegalArgumentException("Account is not found")
