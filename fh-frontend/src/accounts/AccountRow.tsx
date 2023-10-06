@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from '@mui/icons-material/Cancel';
 import TextField from '@mui/material/TextField';
 
 import { Account, deleteAccount, updateAccount } from 'accounts/accountsSlice'
@@ -17,7 +18,7 @@ interface AccountRowProps {
 
 const AccountRow: FC<AccountRowProps> = ({ account }): ReactElement => {
     const dispatch = useAppDispatch();
-    const [amount, setAmount] = useState(account.balance.amount.toString());
+    const [_amount, setAmount] = useState(account.balance.amount.toString());
     const [isEdit, setIsEdit] = useState(false);
 
     const amountView = isEdit ? (
@@ -25,14 +26,16 @@ const AccountRow: FC<AccountRowProps> = ({ account }): ReactElement => {
             id="balance-amount"
             variant="standard"
             defaultValue={account.balance.amount}
-            error={isNaN(Number(amount))}
+            error={isNaN(Number(_amount))}
             onChange={(event) => setAmount(event.target.value)}
         />
     ) : account.balance.amount;
 
     const save = () => {
-        const balance = { amount: Number(amount), currency: account.balance.currency }
-        dispatch(updateAccount({ id: account.id, balance }));
+        if (account.balance.amount !== Number(_amount)) {
+            const balance = { amount: Number(_amount), currency: account.balance.currency }
+            dispatch(updateAccount({ id: account.id, balance }));
+        }
         setIsEdit(false);
     }
 
@@ -46,9 +49,14 @@ const AccountRow: FC<AccountRowProps> = ({ account }): ReactElement => {
             <TableCell align="left">{account.balance.currency}</TableCell>
             <TableCell align="right">
                 {isEdit ? (
-                    <IconButton aria-label="save" onClick={save}>
-                        <SaveIcon fontSize='small' />
-                    </IconButton>
+                    <div style={{display: 'inline'}}>
+                        <IconButton aria-label="save" onClick={save}>
+                            <SaveIcon fontSize='small' />
+                        </IconButton>
+                        <IconButton aria-label="cancel" onClick={() => setIsEdit(false)}>
+                            <CancelIcon fontSize='small' />
+                        </IconButton>
+                    </div>
                 ) : (
                     <IconButton aria-label="edit" onClick={() => setIsEdit(true)}>
                         <EditIcon fontSize='small' />
