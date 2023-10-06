@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import { RootState } from 'app/store';
 
 
@@ -32,14 +33,15 @@ export const loadAccounts = createAsyncThunk(
 
 export const updateAccount = createAsyncThunk(
     'accounts/updateAccount',
-    async ({ id, balance }: { id: number, balance: Money }, thunkAPI) => {
-        await fetch(`/accounts/account/${id}`, {
+    async ({ account, balance }: { account: Account, balance: Money }, thunkAPI) => {
+        await fetch(`/accounts/account/${account.id}`, {
             method: 'PUT',
             body: JSON.stringify(balance),
             headers: {
                 "Content-Type": "application/json",
               },
         });
+        toast.success(`Account "${account.name}" was updated`)
         thunkAPI.dispatch(loadAccounts())
     }
 );

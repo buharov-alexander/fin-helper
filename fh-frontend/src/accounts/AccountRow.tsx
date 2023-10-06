@@ -34,7 +34,7 @@ const AccountRow: FC<AccountRowProps> = ({ account }): ReactElement => {
     const save = () => {
         if (account.balance.amount !== Number(_amount)) {
             const balance = { amount: Number(_amount), currency: account.balance.currency }
-            dispatch(updateAccount({ id: account.id, balance }));
+            dispatch(updateAccount({ account, balance }));
         }
         setIsEdit(false);
     }
