@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 
 import { Account } from 'accounts/accountsSlice'
 import AccountsRow from './AccountRow';
+import './AccountsTable.scss';
 
 interface AccountsTableProps {
     accounts: Account[],

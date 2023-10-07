@@ -19,15 +19,16 @@ interface AccountRowProps {
 const AccountRow: FC<AccountRowProps> = ({ account }): ReactElement => {
     const dispatch = useAppDispatch();
     const [_amount, setAmount] = useState(account.balance.amount.toString());
-    const [isEdit, setIsEdit] = useState(false);
+    const [_isEdit, setIsEdit] = useState(false);
 
-    const amountView = isEdit ? (
+    const amountView = _isEdit ? (
         <TextField
             id="balance-amount"
             variant="standard"
             defaultValue={account.balance.amount}
             error={isNaN(Number(_amount))}
             onChange={(event) => setAmount(event.target.value)}
+            autoFocus
         />
     ) : account.balance.amount;
 
@@ -39,26 +40,47 @@ const AccountRow: FC<AccountRowProps> = ({ account }): ReactElement => {
         setIsEdit(false);
     }
 
+    const updateEditMode = (value: boolean) => {
+        if (value === _isEdit) {
+            return;
+        }
+        setIsEdit(value);
+    }
+
+    const onKeyUp = (event: React.KeyboardEvent<HTMLTableCellElement>) => {
+        if (_isEdit && event.key === 'Enter') {
+            save();
+        }
+    }
+
+    const rowClassName = _isEdit ? "b-account-row" : "b-account-row b-account-row__not-edit";
     return (
-        <TableRow>
-            <TableCell align="left">{account.id}</TableCell>
-            <TableCell align="left">{account.name}</TableCell>
-            <TableCell style={{ width: '200px' }} align="left">
+        <TableRow className={rowClassName}>
+            <TableCell style={{ width: '10%' }} align="left">{account.id}</TableCell>
+            <TableCell style={{ width: '20%' }} align="left">{account.name}</TableCell>
+            <TableCell
+                style={{ width: '200px' }}
+                align="left"
+                className="b-account-row__balance"
+                onClick={() => updateEditMode(true)}
+                onBlur={() => updateEditMode(false)}
+                onKeyUp={ onKeyUp }
+            >
                 {amountView}
             </TableCell>
-            <TableCell align="left">{account.balance.currency}</TableCell>
+            <TableCell style={{ width: '20%' }} align="left">{account.balance.currency}</TableCell>
             <TableCell align="right">
-                {isEdit ? (
-                    <div style={{display: 'inline'}}>
+                {_isEdit ? (
+                    <div style={{ display: 'inline' }}>
                         <IconButton aria-label="save" onClick={save}>
                             <SaveIcon fontSize='small' />
                         </IconButton>
-                        <IconButton aria-label="cancel" onClick={() => setIsEdit(false)}>
+                        <IconButton aria-label="cancel" onClick={() => updateEditMode(false)}>
                             <CancelIcon fontSize='small' />
                         </IconButton>
                     </div>
                 ) : (
-                    <IconButton aria-label="edit" onClick={() => setIsEdit(true)}>
+                    <IconButton aria-label="edit" onClick={() => updateEditMode(true)}>
                         <EditIcon fontSize='small' />
                     </IconButton>
                 )}
