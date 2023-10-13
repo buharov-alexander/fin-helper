@@ -25,7 +25,7 @@ const initialState: AccountsState = {
 export const loadAccounts = createAsyncThunk(
     'accounts/loadAccounts',
     async () => {
-        const response = await fetch('/accounts/list');
+        const response = await fetch('/api/accounts/list');
         // The value we return becomes the `fulfilled` action payload
         return response.json();
     }
@@ -34,7 +34,7 @@ export const loadAccounts = createAsyncThunk(
 export const updateAccount = createAsyncThunk(
     'accounts/updateAccount',
     async ({ account, balance }: { account: Account, balance: Money }, thunkAPI) => {
-        await fetch(`/accounts/account/${account.id}`, {
+        await fetch(`/api/accounts/account/${account.id}`, {
             method: 'PUT',
             body: JSON.stringify(balance),
             headers: {
@@ -49,7 +49,7 @@ export const updateAccount = createAsyncThunk(
 export const deleteAccount = createAsyncThunk(
     'accounts/deleteAccount',
     async (id: number, thunkAPI) => {
-        await fetch(`/accounts/account/${id}`, { method: 'DELETE' });
+        await fetch(`/api/accounts/account/${id}`, { method: 'DELETE' });
         thunkAPI.dispatch(loadAccounts())
     }
 );

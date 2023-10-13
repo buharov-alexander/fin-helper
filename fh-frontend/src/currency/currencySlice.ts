@@ -12,7 +12,7 @@ const initialState: CurrencyState = {
 export const loadCurrency = createAsyncThunk(
     'currency/loadCurrency',
     async () => {
-        const response = await fetch('/currency/daily');
+        const response = await fetch('/api/currency/daily');
         return response.json();
     }
 );

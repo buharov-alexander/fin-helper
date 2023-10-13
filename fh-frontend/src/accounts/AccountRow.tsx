@@ -8,6 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import TextField from '@mui/material/TextField';
+import { Link } from "react-router-dom";
 
 import { Account, deleteAccount, updateAccount } from 'accounts/accountsSlice'
 
@@ -57,7 +58,9 @@ const AccountRow: FC<AccountRowProps> = ({ account }): ReactElement => {
     return (
         <TableRow className={rowClassName}>
             <TableCell style={{ width: '10%' }} align="left">{account.id}</TableCell>
-            <TableCell style={{ width: '20%' }} align="left">{account.name}</TableCell>
+            <TableCell style={{ width: '20%' }} align="left">
+                <Link className="b-link" to={`accounts/${account.id}`}>{account.name}</Link>
+            </TableCell>
             <TableCell
                 style={{ width: '200px' }}
                 align="left"

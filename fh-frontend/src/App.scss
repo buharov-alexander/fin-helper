@@ -1,9 +1,19 @@
+$color-white: #f3f3f3;
+$color-blue: #1876d2;
+
 body {
-  background-color: #f3f3f3;
+  background-color: $color-white;
 
   .main {
     padding: 10px;
   }
+}
+
+.b-link {
+  text-decoration: none;
+  text-decoration: none;
+  color: $color-blue;
+  font-weight: bold;
 }
 
 
