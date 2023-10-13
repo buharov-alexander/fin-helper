@@ -13,6 +13,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import SummaryPage from 'pages/SummaryPage';
+import AccountPage from 'pages/AccountPage';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/accounts/:id",
-    element: <div>Hello world!</div>,
+    element: <AccountPage />,
   },
 ]);
 

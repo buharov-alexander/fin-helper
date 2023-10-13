@@ -13,13 +13,21 @@ export interface Account {
     balance: Money
 }
 
+export interface AccountState {
+    id: number,
+    accountId: number,
+    date: number,
+    balance: Money
+}
 
 interface AccountsState {
     accounts: Account[];
+    accountHistory: AccountState[]
 }
 
 const initialState: AccountsState = {
     accounts: [],
+    accountHistory: [],
 };
 
 export const loadAccounts = createAsyncThunk(
@@ -54,6 +62,14 @@ export const deleteAccount = createAsyncThunk(
     }
 );
 
+export const loadAccountHistory = createAsyncThunk(
+    'accounts/loadAccountHistory',
+    async (id: number, thunkAPI) => {
+        const response = await fetch(`/api/accounts/account/${id}/states`, { method: 'GET' });
+        return response.json();
+    }
+);
+
 export const accountsSlice = createSlice({
     name: 'accounts',
     initialState,
@@ -67,9 +83,13 @@ export const accountsSlice = createSlice({
             .addCase(loadAccounts.fulfilled, (state, action) => {
                 state.accounts = action.payload;
             })
+            .addCase(loadAccountHistory.fulfilled, (state, action) => {
+                state.accountHistory = action.payload;
+            })
     },
 });
 
 export const selectAccounts = (state: RootState) => state.accounts.accounts;
+export const selectAccountHistory = (state: RootState) => state.accounts.accountHistory;
 
 export default accountsSlice.reducer;

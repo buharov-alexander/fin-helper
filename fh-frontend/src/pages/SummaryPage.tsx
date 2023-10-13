@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
-import AccountsTable from 'accounts/AccountsTable';
-import FinalAmount from 'accounts/FinalAmount';
+import AccountsTable from 'accounts/accountsTable/AccountsTable';
+import FinalAmount from 'accounts/finalAmount/FinalAmount';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { loadAccounts, selectAccounts } from 'accounts/accountsSlice';
 import { loadCurrency, selectCurrencyRateMap } from 'currency/currencySlice';
