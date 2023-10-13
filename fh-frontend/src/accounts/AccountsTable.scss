@@ -1,6 +1,6 @@
 .b-account-row {
 
-    &.b-account-row__not-edit:hover .b-account-row__balance{
+    &.b-account-row__not-edit .b-account-row__balance:hover {
         background-color: #f3f3f3;
     }
 }
