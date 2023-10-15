@@ -23,6 +23,11 @@ internal class AccountsController(
 		return accountService.getAccounts().map { account: Account -> AccountDTO(account) }
 	}
 
+	@GetMapping("/{id}")
+	fun getAccount(@PathVariable id: Long): AccountDTO {
+		return AccountDTO(accountService.getAccount(id))
+	}
+
 	@PostMapping("/account")
 	fun createAccount(@RequestBody accountDTO: AccountDTO): AccountDTO {
 		return AccountDTO(accountService.create(accountDTO.toModel()))

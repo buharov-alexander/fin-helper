@@ -10,15 +10,15 @@ import { Link as RouterLink } from "react-router-dom";
 
 import AccountHistoryTable from 'accounts/historyTable/AccountHistoryTable';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { loadAccountHistory, selectAccountHistory } from 'accounts/accountsSlice';
+import { loadAccountDetails, selectAccountDetails } from 'accounts/accountsSlice';
 
 export default function AccountPage() {
     let { id } = useParams();
     const dispatch = useAppDispatch();
-    const accountHistory = useAppSelector(selectAccountHistory);
+    const accountDetails = useAppSelector(selectAccountDetails);
 
     useEffect(() => {
-        dispatch(loadAccountHistory(Number(id)));
+        dispatch(loadAccountDetails(Number(id)));
     }, [dispatch, id]);
 
     return (
@@ -32,11 +32,11 @@ export default function AccountPage() {
                 >
                     Accounts
                 </Link>
-                <Typography color="text.primary">{id}</Typography>
+                <Typography color="text.primary">{accountDetails.account?.name}</Typography>
             </Breadcrumbs>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <AccountHistoryTable accountHistory={accountHistory} />
+                    <AccountHistoryTable accountHistory={accountDetails.states} />
                 </Grid>
             </Grid>
         </Box>

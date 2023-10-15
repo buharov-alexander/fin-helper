@@ -20,14 +20,19 @@ export interface AccountState {
     balance: Money
 }
 
+interface AccountDetails {
+    states: AccountState[],
+    account?: Account,
+}
+
 interface AccountsState {
-    accounts: Account[];
-    accountHistory: AccountState[]
+    accounts: Account[],
+    accountDetails: AccountDetails,
 }
 
 const initialState: AccountsState = {
     accounts: [],
-    accountHistory: [],
+    accountDetails: {states: []},
 };
 
 export const loadAccounts = createAsyncThunk(
@@ -62,11 +67,14 @@ export const deleteAccount = createAsyncThunk(
     }
 );
 
-export const loadAccountHistory = createAsyncThunk(
-    'accounts/loadAccountHistory',
+export const loadAccountDetails = createAsyncThunk(
+    'accounts/loadAccountDetails',
     async (id: number, thunkAPI) => {
-        const response = await fetch(`/api/accounts/account/${id}/states`, { method: 'GET' });
-        return response.json();
+        const responseAccount = await fetch(`/api/accounts/${id}`, { method: 'GET' });
+        const account = await responseAccount.json();
+        const responseStates = await fetch(`/api/accounts/account/${id}/states`, { method: 'GET' });
+        const states = await responseStates.json();
+        return { states, account } as AccountDetails;
     }
 );
 
@@ -83,13 +91,13 @@ export const accountsSlice = createSlice({
             .addCase(loadAccounts.fulfilled, (state, action) => {
                 state.accounts = action.payload;
             })
-            .addCase(loadAccountHistory.fulfilled, (state, action) => {
-                state.accountHistory = action.payload;
+            .addCase(loadAccountDetails.fulfilled, (state, action) => {
+                state.accountDetails = action.payload;
             })
     },
 });
 
 export const selectAccounts = (state: RootState) => state.accounts.accounts;
-export const selectAccountHistory = (state: RootState) => state.accounts.accountHistory;
+export const selectAccountDetails = (state: RootState) => state.accounts.accountDetails;
 
 export default accountsSlice.reducer;

@@ -18,6 +18,10 @@ internal class AccountServiceImpl(
 		return accountRepository.findByIsDisabledFalse()
 	}
 
+	override fun getAccount(id: Long): Account {
+		return accountRepository.findById(id).orElseThrow()
+	}
+
 	override fun create(account: Account): Account {
 		val savedAccount = accountRepository.save(account)
 		publisher.publishEvent(AccountStateChangedEvent(this, savedAccount))
