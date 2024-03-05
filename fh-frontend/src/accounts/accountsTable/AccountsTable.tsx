@@ -8,7 +8,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 import { Account } from 'accounts/accountsSlice'
-import AccountsRow from './AccountRow';
+import AccountRow from './AccountRow';
+import AddAccountRow from './AddAccountRow';
 import './AccountsTable.scss';
 
 interface AccountsTableProps {
@@ -29,7 +30,8 @@ const AccountsTable: FC<AccountsTableProps> = ({ accounts }): ReactElement => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {accounts.map((account) => <AccountsRow key={account.id} account={account} />)}
+                    {accounts.map((account) => <AccountRow key={account.id} account={account} />)}
+                    <AddAccountRow />
                 </TableBody>
             </Table>
         </TableContainer>
