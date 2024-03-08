@@ -67,7 +67,7 @@ const AccountRow: FC<AccountRowProps> = ({ account }): ReactElement => {
                 className="b-account-row__balance"
                 onClick={() => updateEditMode(true)}
                 onBlur={() => updateEditMode(false)}
-                onKeyUp={ onKeyUp }
+                onKeyUp={onKeyUp}
             >
                 {amountView}
             </TableCell>

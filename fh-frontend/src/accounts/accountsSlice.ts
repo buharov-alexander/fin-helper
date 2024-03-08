@@ -59,6 +59,21 @@ export const updateAccount = createAsyncThunk(
     }
 );
 
+export const createAccount = createAsyncThunk(
+    'accounts/createAccount',
+    async ({ name, balance }: { name: String, balance: Money }, thunkAPI) => {
+        await fetch(`/api/accounts/account`, {
+            method: 'POST',
+            body: JSON.stringify({name, balance}),
+            headers: {
+                "Content-Type": "application/json",
+              },
+        });
+        toast.success(`Account "${name}" was created`)
+        thunkAPI.dispatch(loadAccounts())
+    }
+);
+
 export const deleteAccount = createAsyncThunk(
     'accounts/deleteAccount',
     async (id: number, thunkAPI) => {

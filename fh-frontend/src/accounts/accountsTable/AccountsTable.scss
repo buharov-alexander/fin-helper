@@ -1,4 +1,5 @@
 .b-account-row {
+    height: 50px;
 
     &.b-account-row__not-edit .b-account-row__balance:hover {
         background-color: #f3f3f3;
@@ -7,4 +8,14 @@
 
 .b-add-account-row {
     cursor: pointer;
+    height: 50px;
+
+    .b-add-account-row__content {
+        display: flex;
+        align-items: center;
+
+        .b-add-account-row__content-form {
+            margin-left: 5px;
+        }
+    }
 }
