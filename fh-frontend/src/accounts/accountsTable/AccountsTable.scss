@@ -9,13 +9,4 @@
 .b-add-account-row {
     cursor: pointer;
     height: 50px;
-
-    .b-add-account-row__content {
-        display: flex;
-        align-items: center;
-
-        .b-add-account-row__content-form {
-            margin-left: 5px;
-        }
-    }
 }

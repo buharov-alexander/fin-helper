@@ -3,6 +3,8 @@ import { useAppDispatch } from 'app/hooks';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import SaveIcon from '@mui/icons-material/Save';
 
 import { createAccount } from 'accounts/accountsSlice'
 
@@ -33,24 +35,41 @@ const AddAccountRow = () => {
     }
 
     const renderContent = () => {
-        const label = "Add New Account";
         if (_isEdit) {
             return (
-                <div className="b-add-account-row__content">
-                    {label + ":"}
-                    <TextField
-                        id="account-name"
-                        className="b-add-account-row__content-form"
-                        variant="standard"
-                        error={!_name}
-                        onChange={(event) => setName(event.target.value)}
-                        onKeyUp={onKeyUp}
-                        autoFocus
-                    />
-                </div>
+                <React.Fragment>
+                    <TableCell style={{ width: '10%' }}>New</TableCell>
+                    <TableCell style={{ width: '20%' }}>
+                        <TextField
+                            id="account-name"
+                            variant="standard"
+                            error={!_name}
+                            onChange={(event) => setName(event.target.value)}
+                            onKeyUp={onKeyUp}
+                            autoFocus
+                        />
+                    </TableCell>
+                    <TableCell style={{ width: '200px' }}>
+                        <TextField
+                            id="account-amount"
+                            variant="standard"
+                        />
+                    </TableCell>
+                    <TableCell style={{ width: '20%' }}>
+                        <TextField
+                            id="account-currency"
+                            variant="standard"
+                        />
+                    </TableCell>
+                    <TableCell align="right">
+                        <IconButton aria-label="save" onClick={save}>
+                            <SaveIcon fontSize='small' />
+                        </IconButton>
+                    </TableCell>
+                </React.Fragment>
             );
         }
-        return label;
+        return <TableCell colSpan={5}>Add New Account</TableCell>;
     }
 
     return (
@@ -59,7 +78,7 @@ const AddAccountRow = () => {
             onClick={() => updateEditMode(true)}
             onBlur={() => updateEditMode(false)}
         >
-            <TableCell colSpan={5}>{renderContent()}</TableCell>
+            {renderContent()}
         </TableRow>
     );
 }
