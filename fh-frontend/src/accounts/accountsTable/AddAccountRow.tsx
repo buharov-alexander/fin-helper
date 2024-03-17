@@ -4,6 +4,9 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
 import SaveIcon from '@mui/icons-material/Save';
 
 import { createAccount } from 'accounts/accountsSlice'
@@ -11,6 +14,8 @@ import { createAccount } from 'accounts/accountsSlice'
 const AddAccountRow = () => {
     const dispatch = useAppDispatch();
     const [_name, setName] = useState("");
+    const [_amount, setAmount] = useState("0");
+    const [_currency, setCurrency] = useState("RUB");
     const [_isEdit, setIsEdit] = useState(false);
 
     const updateEditMode = (value: boolean) => {
@@ -22,7 +27,7 @@ const AddAccountRow = () => {
 
     const save = () => {
         if (!!_name) {
-            const balance = { amount: 0, currency: 'RUB' }
+            const balance = { amount: Number(_amount), currency: _currency }
             dispatch(createAccount({ name: _name, balance }));
         }
         setIsEdit(false);
@@ -53,13 +58,24 @@ const AddAccountRow = () => {
                         <TextField
                             id="account-amount"
                             variant="standard"
+                            error={isNaN(Number(_amount))}
+                            value={_amount}
+                            onChange={(event) => setAmount(event.target.value)}
+
                         />
                     </TableCell>
                     <TableCell style={{ width: '20%' }}>
-                        <TextField
-                            id="account-currency"
-                            variant="standard"
-                        />
+                        <FormControl variant="standard">
+                            <Select
+                                id="account-currency"
+                                value={_currency}
+                                onChange={(event) => setCurrency(event.target.value)}
+                            >
+                                <MenuItem value={"RUB"}>RUB</MenuItem>
+                                <MenuItem value={"EUR"}>EUR</MenuItem>
+                                <MenuItem value={"USD"}>USD</MenuItem>
+                            </Select>
+                        </FormControl>
                     </TableCell>
                     <TableCell align="right">
                         <IconButton aria-label="save" onClick={save}>
@@ -76,7 +92,6 @@ const AddAccountRow = () => {
         <TableRow
             className="b-add-account-row"
             onClick={() => updateEditMode(true)}
-            onBlur={() => updateEditMode(false)}
         >
             {renderContent()}
         </TableRow>
