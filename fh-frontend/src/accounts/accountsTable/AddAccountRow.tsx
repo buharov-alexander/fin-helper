@@ -61,7 +61,6 @@ const AddAccountRow = () => {
                             error={isNaN(Number(_amount))}
                             value={_amount}
                             onChange={(event) => setAmount(event.target.value)}
-
                         />
                     </TableCell>
                     <TableCell style={{ width: '20%' }}>
@@ -71,14 +70,18 @@ const AddAccountRow = () => {
                                 value={_currency}
                                 onChange={(event) => setCurrency(event.target.value)}
                             >
-                                <MenuItem value={"RUB"}>RUB</MenuItem>
-                                <MenuItem value={"EUR"}>EUR</MenuItem>
-                                <MenuItem value={"USD"}>USD</MenuItem>
+                                <MenuItem className="b-add-account-row__option" value={"RUB"}>RUB</MenuItem>
+                                <MenuItem className="b-add-account-row__option" value={"EUR"}>EUR</MenuItem>
+                                <MenuItem className="b-add-account-row__option" value={"USD"}>USD</MenuItem>
                             </Select>
                         </FormControl>
                     </TableCell>
                     <TableCell align="right">
-                        <IconButton aria-label="save" onClick={save}>
+                        <IconButton
+                            aria-label="save"
+                            onClick={save}
+                            disabled={!_name || isNaN(Number(_amount))}
+                        >
                             <SaveIcon fontSize='small' />
                         </IconButton>
                     </TableCell>
@@ -92,6 +95,12 @@ const AddAccountRow = () => {
         <TableRow
             className="b-add-account-row"
             onClick={() => updateEditMode(true)}
+            onBlur={(event) => {
+                if (!event.relatedTarget || (!event.currentTarget.contains(event.relatedTarget)
+                    && !event.relatedTarget.classList.contains('b-add-account-row__option'))) {
+                    updateEditMode(false);
+                }
+            }}
         >
             {renderContent()}
         </TableRow>

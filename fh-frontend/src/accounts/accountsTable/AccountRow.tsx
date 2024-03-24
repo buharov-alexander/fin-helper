@@ -56,7 +56,14 @@ const AccountRow: FC<AccountRowProps> = ({ account }): ReactElement => {
 
     const rowClassName = _isEdit ? "b-account-row" : "b-account-row b-account-row__not-edit";
     return (
-        <TableRow className={rowClassName}>
+        <TableRow
+            className={rowClassName}
+            onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) {
+                    updateEditMode(false)
+                }
+            }}
+        >
             <TableCell style={{ width: '10%' }} align="left">{account.id}</TableCell>
             <TableCell style={{ width: '20%' }} align="left">
                 <Link className="b-link" to={`accounts/${account.id}`}>{account.name}</Link>
@@ -66,7 +73,6 @@ const AccountRow: FC<AccountRowProps> = ({ account }): ReactElement => {
                 align="left"
                 className="b-account-row__balance"
                 onClick={() => updateEditMode(true)}
-                onBlur={() => updateEditMode(false)}
                 onKeyUp={onKeyUp}
             >
                 {amountView}
@@ -75,7 +81,11 @@ const AccountRow: FC<AccountRowProps> = ({ account }): ReactElement => {
             <TableCell align="right">
                 {_isEdit ? (
                     <div style={{ display: 'inline' }}>
-                        <IconButton aria-label="save" onClick={save}>
+                        <IconButton
+                            aria-label="save"
+                            onClick={save}
+                            disabled={isNaN(Number(_amount))}
+                        >
                             <SaveIcon fontSize='small' />
                         </IconButton>
                         <IconButton aria-label="cancel" onClick={() => updateEditMode(false)}>
