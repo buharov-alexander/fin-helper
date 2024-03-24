@@ -39,6 +39,9 @@ const AddAccountRow = () => {
         }
     }
 
+    const isPartOfRow = (currentTarget: (EventTarget & Element), relatedTarget: (EventTarget & Element)) =>
+        currentTarget.contains(relatedTarget) || relatedTarget.classList.contains('b-add-account-row__option')
+
     const renderContent = () => {
         if (_isEdit) {
             return (
@@ -96,8 +99,7 @@ const AddAccountRow = () => {
             className="b-add-account-row"
             onClick={() => updateEditMode(true)}
             onBlur={(event) => {
-                if (!event.relatedTarget || (!event.currentTarget.contains(event.relatedTarget)
-                    && !event.relatedTarget.classList.contains('b-add-account-row__option'))) {
+                if (!event.relatedTarget || !isPartOfRow(event.currentTarget, event.relatedTarget)) {
                     updateEditMode(false);
                 }
             }}
