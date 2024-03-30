@@ -24,6 +24,7 @@ const AccountsTable: FC<AccountHistoryTableProps> = ({ accountHistory }): ReactE
                         <TableCell align="left">Date</TableCell>
                         <TableCell align="left">Balance</TableCell>
                         <TableCell align="left">Currency</TableCell>
+                        <TableCell align="right">Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

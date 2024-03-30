@@ -19,4 +19,8 @@ internal class AccountStateServiceImpl(private val accountStateRepository: Accou
 	override fun getStates(accountId: Long): List<AccountState> {
 		return accountStateRepository.getByAccountId(accountId)
 	}
+
+	override fun deleteState(stateId: Long) {
+		accountStateRepository.deleteById(stateId)
+	}
 }

@@ -6,4 +6,5 @@ import com.bukharov.fh.fhaccounts.model.AccountState
 interface AccountStateService {
 	fun saveState(account: Account): AccountState
 	fun getStates(accountId: Long): List<AccountState>
+	fun deleteState(stateId: Long)
 }

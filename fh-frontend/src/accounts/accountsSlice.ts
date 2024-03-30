@@ -78,7 +78,17 @@ export const deleteAccount = createAsyncThunk(
     'accounts/deleteAccount',
     async (id: number, thunkAPI) => {
         await fetch(`/api/accounts/account/${id}`, { method: 'DELETE' });
+        toast.success(`Account was deleted`)
         thunkAPI.dispatch(loadAccounts())
+    }
+);
+
+export const deleteAccountState = createAsyncThunk(
+    'accounts/deleteAccountState',
+    async (state: AccountState, thunkAPI) => {
+        await fetch(`/api/accounts/account/states/${state.id}`, { method: 'DELETE' });
+        toast.success(`Account state was deleted`)
+        thunkAPI.dispatch(loadAccountDetails(state.accountId))
     }
 );
 

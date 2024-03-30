@@ -47,4 +47,9 @@ internal class AccountsController(
 	fun getAccountStates(@PathVariable id: Long): List<AccountStateDTO> {
 		return accountStateService.getStates(id).map { accountState -> AccountStateDTO(accountState) }
 	}
+
+	@DeleteMapping("/account/states/{stateId}")
+	fun deleteAccountState(@PathVariable stateId: Long) {
+		return accountStateService.deleteState(stateId)
+	}
 }
