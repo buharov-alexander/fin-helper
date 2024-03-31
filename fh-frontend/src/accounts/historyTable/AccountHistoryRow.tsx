@@ -12,7 +12,7 @@ interface AccountHistoryRowProps {
     accountState: AccountState,
 }
 
-const AccountRow: FC<AccountHistoryRowProps> = ({ accountState }): ReactElement => {
+const AccountHistoryRow: FC<AccountHistoryRowProps> = ({ accountState }): ReactElement => {
     const dispatch = useAppDispatch();
 
     const formattedDate = moment(accountState.date).format("MM-DD-YYYY");
@@ -30,4 +30,4 @@ const AccountRow: FC<AccountHistoryRowProps> = ({ accountState }): ReactElement 
     );
 }
 
-export default AccountRow;
+export default AccountHistoryRow;

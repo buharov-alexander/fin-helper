@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 
 import { AccountState } from 'accounts/accountsSlice'
 import AccountHistoryRow from './AccountHistoryRow';
+import AddAccountHistoryRow from './AddAccountHistoryRow';
 import './AccountHistoryTable.scss';
 
 interface AccountHistoryTableProps {
@@ -29,6 +30,7 @@ const AccountsTable: FC<AccountHistoryTableProps> = ({ accountHistory }): ReactE
                 </TableHead>
                 <TableBody>
                     {accountHistory.map((accountState) => <AccountHistoryRow key={accountState.id} accountState={accountState} />)}
+                    <AddAccountHistoryRow />
                 </TableBody>
             </Table>
         </TableContainer>
