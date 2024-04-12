@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component
 class AccountStateChangedEventListener(private val accountStateService: AccountStateService) :
 	ApplicationListener<AccountStateChangedEvent> {
 	override fun onApplicationEvent(event: AccountStateChangedEvent) {
-		accountStateService.saveState(event.account)
+		accountStateService.saveCurrentState(event.account)
 	}
 }

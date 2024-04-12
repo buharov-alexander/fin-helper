@@ -11,8 +11,12 @@ import org.springframework.transaction.annotation.Transactional
 internal class AccountStateServiceImpl(private val accountStateRepository: AccountStateRepository) :
 	AccountStateService {
 
-	override fun saveState(account: Account): AccountState {
+	override fun saveCurrentState(account: Account): AccountState {
 		val accountState = account.getState();
+		return accountStateRepository.save(accountState)
+	}
+
+	override fun saveState(accountState: AccountState): AccountState {
 		return accountStateRepository.save(accountState)
 	}
 

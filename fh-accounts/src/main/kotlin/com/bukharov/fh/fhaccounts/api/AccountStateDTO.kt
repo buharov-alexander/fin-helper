@@ -18,4 +18,7 @@ class AccountStateDTO(
 		accountState.getBalance()
 	)
 
+	fun toModel(): AccountState {
+		return AccountState(id, date, balance)
+	}
 }

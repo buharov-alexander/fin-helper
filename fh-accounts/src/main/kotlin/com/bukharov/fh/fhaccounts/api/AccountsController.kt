@@ -28,28 +28,18 @@ internal class AccountsController(
 		return AccountDTO(accountService.getAccount(id))
 	}
 
-	@PostMapping("/account")
+	@PostMapping
 	fun createAccount(@RequestBody accountDTO: AccountDTO): AccountDTO {
 		return AccountDTO(accountService.create(accountDTO.toModel()))
 	}
 
-	@PutMapping("/account/{id}")
+	@PutMapping("/{id}")
 	fun updateAccount(@PathVariable id: Long,  @RequestBody balance: Money): AccountDTO {
 		return AccountDTO(accountService.update(id, balance))
 	}
 
-	@DeleteMapping("/account/{id}")
+	@DeleteMapping("/{id}")
 	fun deleteAccount(@PathVariable id: Long) {
 		accountService.delete(id)
-	}
-
-	@GetMapping("/account/{id}/states")
-	fun getAccountStates(@PathVariable id: Long): List<AccountStateDTO> {
-		return accountStateService.getStates(id).map { accountState -> AccountStateDTO(accountState) }
-	}
-
-	@DeleteMapping("/account/states/{stateId}")
-	fun deleteAccountState(@PathVariable stateId: Long) {
-		return accountStateService.deleteState(stateId)
 	}
 }
