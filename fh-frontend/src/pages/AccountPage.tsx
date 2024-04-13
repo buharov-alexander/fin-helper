@@ -36,7 +36,7 @@ export default function AccountPage() {
             </Breadcrumbs>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <AccountHistoryTable accountHistory={accountDetails.states} />
+                    <AccountHistoryTable accountHistory={accountDetails.states} account={accountDetails.account} />
                 </Grid>
             </Grid>
         </Box>

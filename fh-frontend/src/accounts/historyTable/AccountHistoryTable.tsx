@@ -7,16 +7,17 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-import { AccountState } from 'accounts/accountsSlice'
+import { Account, AccountState } from 'accounts/accountsSlice'
 import AccountHistoryRow from './AccountHistoryRow';
 import AddAccountHistoryRow from './AddAccountHistoryRow';
 import './AccountHistoryTable.scss';
 
 interface AccountHistoryTableProps {
     accountHistory: AccountState[],
+    account?: Account
 }
 
-const AccountsTable: FC<AccountHistoryTableProps> = ({ accountHistory }): ReactElement => {
+const AccountsTable: FC<AccountHistoryTableProps> = ({ accountHistory, account }): ReactElement => {
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} size="small" aria-label="simple table">
@@ -30,7 +31,7 @@ const AccountsTable: FC<AccountHistoryTableProps> = ({ accountHistory }): ReactE
                 </TableHead>
                 <TableBody>
                     {accountHistory.map((accountState) => <AccountHistoryRow key={accountState.id} accountState={accountState} />)}
-                    <AddAccountHistoryRow />
+                    <AddAccountHistoryRow account={account}/>
                 </TableBody>
             </Table>
         </TableContainer>
