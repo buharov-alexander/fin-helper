@@ -86,7 +86,7 @@ export const deleteAccount = createAsyncThunk(
 export const addAccountState = createAsyncThunk(
     'accounts/addAccountState',
     async (state: AccountState, thunkAPI) => {
-        await fetch(`/api/account-states/create`, {
+        await fetch(`/api/account-states`, {
             method: 'POST',
             body: JSON.stringify(state),
             headers: {

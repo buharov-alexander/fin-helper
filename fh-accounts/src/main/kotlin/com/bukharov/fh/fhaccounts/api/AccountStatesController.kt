@@ -14,7 +14,7 @@ internal class AccountStatesController(
 		return accountStateService.getStates(id).map { accountState -> AccountStateDTO(accountState) }
 	}
 
-	@PostMapping("/create")
+	@PostMapping
 	fun saveAccountState(@RequestBody accountState: AccountStateDTO): AccountStateDTO {
 		return AccountStateDTO(accountStateService.saveState(accountState.toModel()))
 	}

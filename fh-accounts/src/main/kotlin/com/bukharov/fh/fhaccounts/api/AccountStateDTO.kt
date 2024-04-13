@@ -19,6 +19,6 @@ class AccountStateDTO(
 	)
 
 	fun toModel(): AccountState {
-		return AccountState(id, date, balance)
+		return AccountState(accountId, date, balance)
 	}
 }
