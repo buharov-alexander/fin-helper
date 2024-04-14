@@ -17,7 +17,7 @@ class AccountState(
 ) {
 	@Column(length = 3, nullable = false)
 	private var currency: String = "RUB"
-	@Column(columnDefinition = "Decimal(19,2) default '0.00'", nullable = false)
+	@Column(precision = 11, scale = 2, nullable = false)
 	private var balance: BigDecimal = BigDecimal(0)
 
 	init {
