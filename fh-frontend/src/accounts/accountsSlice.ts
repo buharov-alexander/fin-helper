@@ -35,6 +35,15 @@ const initialState: AccountsState = {
     accountDetails: {states: []},
 };
 
+const notification = async (response: Response, message: String) => {
+    if (response.ok) {
+        toast.success(message);
+    } else {
+        const body = await response.json();
+        toast.error(body.message)
+    }
+}
+
 export const loadAccounts = createAsyncThunk(
     'accounts/loadAccounts',
     async () => {
@@ -47,14 +56,14 @@ export const loadAccounts = createAsyncThunk(
 export const updateAccount = createAsyncThunk(
     'accounts/updateAccount',
     async ({ account, balance }: { account: Account, balance: Money }, thunkAPI) => {
-        await fetch(`/api/accounts/${account.id}`, {
+        const response = await fetch(`/api/accounts/${account.id}`, {
             method: 'PUT',
             body: JSON.stringify(balance),
             headers: {
                 "Content-Type": "application/json",
               },
         });
-        toast.success(`Account "${account.name}" was updated`)
+        notification(response, `Account "${account.name}" was updated`)
         thunkAPI.dispatch(loadAccounts())
     }
 );
@@ -62,14 +71,15 @@ export const updateAccount = createAsyncThunk(
 export const createAccount = createAsyncThunk(
     'accounts/createAccount',
     async ({ name, balance }: { name: String, balance: Money }, thunkAPI) => {
-        await fetch(`/api/accounts`, {
+       const response = await fetch(`/api/accounts`, {
             method: 'POST',
             body: JSON.stringify({name, balance}),
             headers: {
                 "Content-Type": "application/json",
             },
         });
-        toast.success(`Account "${name}" was created`)
+        notification(response, `Account "${name}" was created`)
+
         thunkAPI.dispatch(loadAccounts())
     }
 );
@@ -77,8 +87,9 @@ export const createAccount = createAsyncThunk(
 export const deleteAccount = createAsyncThunk(
     'accounts/deleteAccount',
     async (id: number, thunkAPI) => {
-        await fetch(`/api/accounts/${id}`, { method: 'DELETE' });
-        toast.success(`Account was deleted`)
+        const response = await fetch(`/api/accounts/${id}`, { method: 'DELETE' });
+        notification(response, `Account was deleted`)
+
         thunkAPI.dispatch(loadAccounts())
     }
 );
@@ -86,14 +97,14 @@ export const deleteAccount = createAsyncThunk(
 export const addAccountState = createAsyncThunk(
     'accounts/addAccountState',
     async (state: AccountState, thunkAPI) => {
-        await fetch(`/api/account-states`, {
+        const response = await fetch(`/api/account-states`, {
             method: 'POST',
             body: JSON.stringify(state),
             headers: {
                 "Content-Type": "application/json",
             },
         });
-        toast.success(`Account state was added`)
+        notification(response, `Account state was added`)
         thunkAPI.dispatch(loadAccountDetails(state.accountId))
     }
 );
@@ -101,8 +112,8 @@ export const addAccountState = createAsyncThunk(
 export const deleteAccountState = createAsyncThunk(
     'accounts/deleteAccountState',
     async (state: AccountState, thunkAPI) => {
-        await fetch(`/api/account-states/${state.id}`, { method: 'DELETE' });
-        toast.success(`Account state was deleted`)
+        const response = await fetch(`/api/account-states/${state.id}`, { method: 'DELETE' });
+        notification(response, `Account state was deleted`)
         thunkAPI.dispatch(loadAccountDetails(state.accountId))
     }
 );
