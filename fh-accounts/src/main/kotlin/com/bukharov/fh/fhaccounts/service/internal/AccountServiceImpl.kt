@@ -2,6 +2,7 @@ package com.bukharov.fh.fhaccounts.service.internal
 
 import com.bukharov.fh.fhaccounts.model.Account
 import com.bukharov.fh.fhaccounts.service.AccountService
+import com.bukharov.fh.fhaccounts.service.internal.event.AccountBalanceChangedEvent
 import org.joda.money.Money
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
@@ -24,7 +25,7 @@ internal class AccountServiceImpl(
 
 	override fun create(account: Account): Account {
 		val savedAccount = accountRepository.save(account)
-		publisher.publishEvent(AccountStateChangedEvent(this, savedAccount))
+		publisher.publishEvent(AccountBalanceChangedEvent(this, savedAccount))
 		return savedAccount
 	}
 
@@ -33,7 +34,7 @@ internal class AccountServiceImpl(
 		if (optional.isPresent) {
 			val existingAccount = optional.get()
 			existingAccount.setBalance(balance)
-			publisher.publishEvent(AccountStateChangedEvent(this, existingAccount))
+			publisher.publishEvent(AccountBalanceChangedEvent(this, existingAccount))
 			return existingAccount
 		}
 		throw IllegalArgumentException("Account is not found")

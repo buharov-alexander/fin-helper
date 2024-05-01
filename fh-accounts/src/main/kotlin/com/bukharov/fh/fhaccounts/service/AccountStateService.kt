@@ -7,5 +7,6 @@ interface AccountStateService {
 	fun saveCurrentState(account: Account): AccountState
 	fun saveState(accountState: AccountState): AccountState
 	fun getStates(accountId: Long): List<AccountState>
+	fun getLastState(accountId: Long): AccountState
 	fun deleteState(stateId: Long)
 }
