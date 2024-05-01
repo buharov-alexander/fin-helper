@@ -44,6 +44,7 @@ const AddAccountHistoryRow = ({ account }: { account?: Account }) => {
                                 label="Date"
                                 value={_date}
                                 onChange={(date) => setDate(date)}
+                                disableFuture
                             />
                         </LocalizationProvider>
                     </TableCell>
