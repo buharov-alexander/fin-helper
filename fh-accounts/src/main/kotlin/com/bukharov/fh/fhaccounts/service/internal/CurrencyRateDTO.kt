@@ -1,4 +1,4 @@
-package com.bukharov.fh.fhaccounts.service
+package com.bukharov.fh.fhaccounts.service.internal
 
 import com.bukharov.fh.fhaccounts.config.BigDecimalDeserializer
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize

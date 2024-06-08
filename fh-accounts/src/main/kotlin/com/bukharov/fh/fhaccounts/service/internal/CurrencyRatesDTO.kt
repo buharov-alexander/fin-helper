@@ -1,4 +1,4 @@
-package com.bukharov.fh.fhaccounts.service
+package com.bukharov.fh.fhaccounts.service.internal
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
