@@ -1,4 +1,4 @@
-package com.bukharov.fh.fhaccounts.api
+package com.bukharov.fh.fhaccounts.api.dto
 
 import com.bukharov.fh.fhaccounts.model.Account
 import org.joda.money.Money

@@ -1,5 +1,6 @@
 package com.bukharov.fh.fhaccounts.api
 
+import com.bukharov.fh.fhaccounts.api.dto.AccountDTO
 import com.bukharov.fh.fhaccounts.model.Account
 import com.bukharov.fh.fhaccounts.service.AccountService
 import com.bukharov.fh.fhaccounts.service.AccountStateService

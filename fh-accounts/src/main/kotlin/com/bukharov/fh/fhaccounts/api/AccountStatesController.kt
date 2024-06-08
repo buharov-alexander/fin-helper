@@ -1,5 +1,6 @@
 package com.bukharov.fh.fhaccounts.api
 
+import com.bukharov.fh.fhaccounts.api.dto.AccountStateDTO
 import com.bukharov.fh.fhaccounts.service.AccountService
 import com.bukharov.fh.fhaccounts.service.AccountStateService
 import org.springframework.web.bind.annotation.*
